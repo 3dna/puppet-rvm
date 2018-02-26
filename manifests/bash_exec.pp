@@ -28,7 +28,7 @@ define rvm::bash_exec (
   if $ruby_version == undef {
     $command_ruby_prefix = ""
   } else {
-    $command_ruby_prefix = "rvm ${ruby_version} do "
+    $command_ruby_prefix = "rvm use ${ruby_version} && "
   }
 
   $command_prefix = join([$command_cwd_prefix, $command_ruby_prefix])
