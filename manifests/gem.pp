@@ -21,7 +21,7 @@ define rvm::gem (
       provider => shell,
       command => $uninstall_command,
       user => $user,
-      ruby_version => $ruby,
+      ruby_version => getparam($ruby, "version"),
       onlyif => $has_version_check_command,
     }
   } else {
@@ -33,7 +33,7 @@ define rvm::gem (
         provider => shell,
         command => $command,
         user => $user,
-        ruby_version => $ruby,
+        ruby_version => getparam($ruby, "version"),
         unless => $check_command
       }
     } else {
@@ -50,7 +50,7 @@ define rvm::gem (
         command => $uninstall_old_version_and_install_new_version_command,
         user => $user,
         logoutput => true,
-        ruby_version => $ruby,
+        ruby_version => getparam($ruby, "version"),
         onlyif => $has_wrong_version_check_command
       }
 
@@ -59,7 +59,7 @@ define rvm::gem (
         command => $install_first_version_command,
         user => $user,
         logoutput => true,
-        ruby_version => $ruby,
+        ruby_version => getparam($ruby, "version"),
         unless => $has_no_version_check_command
       }
     }
