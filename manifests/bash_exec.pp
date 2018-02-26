@@ -4,6 +4,7 @@ define rvm::bash_exec (
   $creates = undef,
   $cwd = undef,
   $environment = undef,
+  $gemset = 'global',
   $group = undef,
   $logoutput = undef,
   $onlyif = undef,
@@ -28,7 +29,7 @@ define rvm::bash_exec (
   if $ruby_version == undef {
     $command_ruby_prefix = ""
   } else {
-    $command_ruby_prefix = "rvm use ${ruby_version} && "
+    $command_ruby_prefix = "rvm use ${ruby_version}@${gemset} && "
   }
 
   $command_prefix = join([$command_cwd_prefix, $command_ruby_prefix])

@@ -1,7 +1,8 @@
 define rvm::gem (
   $ruby,
   $ensure = present,
-  $gem = $name
+  $gem = $name,
+  $gemset = 'global'
 ) {
   if $ruby == undef {
      fail("Please provide a $ruby for this gem")
@@ -22,6 +23,7 @@ define rvm::gem (
       command => $uninstall_command,
       user => $user,
       ruby_version => getparam($ruby, "version"),
+      gemset => $gemset,
       onlyif => $has_version_check_command,
     }
   } else {
@@ -34,6 +36,7 @@ define rvm::gem (
         command => $command,
         user => $user,
         ruby_version => getparam($ruby, "version"),
+        gemset => $gemset,
         unless => $check_command
       }
     } else {
@@ -51,6 +54,7 @@ define rvm::gem (
         user => $user,
         logoutput => true,
         ruby_version => getparam($ruby, "version"),
+        gemset => $gemset,
         onlyif => $has_wrong_version_check_command
       }
 
@@ -60,6 +64,7 @@ define rvm::gem (
         user => $user,
         logoutput => true,
         ruby_version => getparam($ruby, "version"),
+        gemset => $gemset,
         unless => $has_no_version_check_command
       }
     }
