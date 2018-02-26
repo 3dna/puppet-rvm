@@ -31,7 +31,7 @@ define rvm::bash_exec (
     $command_ruby_prefix = "rvm ${ruby_version} do "
   }
 
-  $command_prefix = $command_cwd_prefix + $command_ruby_prefix
+  $command_prefix = join($command_cwd_prefix, $command_ruby_prefix)
 
   $escaped_command = join(["/bin/su -l ${user} -c ", shellquote(join(['/bin/bash --login -c ', shellquote(join([$command_prefix, $command], ""))], ""))], "")
 
