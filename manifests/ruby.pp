@@ -35,12 +35,4 @@ define rvm::ruby (
     ruby_string => $version,
     require => [Single_User_Rvm::Install[$user]]
   }
-
-  rvm::bash_exec { "rvm-switched-for-${user}":
-    command => "rvm use --default ${version}",
-    user => $user,
-    logoutput => false,
-    require => Single_user_rvm::Install_Ruby["ruby-${version}-for-${user}"],
-    unless => "rvm current | grep '${version}'"
-  }
 }
