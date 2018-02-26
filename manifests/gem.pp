@@ -22,7 +22,8 @@ define rvm::gem (
       command => $uninstall_command,
       user => $user,
       require => Exec["rvm-switched-for-${user}"],
-      onlyif => $has_version_check_command
+      ruby_version => $ruby,
+      onlyif => $has_version_check_command,
     }
   } else {
     if $ensure == present {
@@ -34,6 +35,7 @@ define rvm::gem (
         command => $command,
         user => $user,
         require => Exec["rvm-switched-for-${user}"],
+        ruby_version => $ruby,
         unless => $check_command
       }
     } else {
@@ -51,6 +53,7 @@ define rvm::gem (
         user => $user,
         logoutput => true,
         require => [Exec["rvm-switched-for-${user}"]],
+        ruby_version => $ruby,
         onlyif => $has_wrong_version_check_command
       }
 
@@ -60,6 +63,7 @@ define rvm::gem (
         user => $user,
         logoutput => true,
         require => [Exec["rvm-switched-for-${user}"]],
+        ruby_version => $ruby,
         unless => $has_no_version_check_command
       }
     }

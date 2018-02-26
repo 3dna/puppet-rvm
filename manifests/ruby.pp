@@ -35,4 +35,5 @@ define rvm::ruby (
     ruby_string => $version,
     require => [Single_User_Rvm::Install[$user]]
   }
+
 }

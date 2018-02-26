@@ -12,6 +12,7 @@ define rvm::bash_exec (
   $refresh = undef,
   $refreshonly = undef,
   $returns = undef,
+  $ruby_version = undef,
   $timeout = undef,
   $tries = undef,
   $try_sleep = undef,
@@ -19,10 +20,18 @@ define rvm::bash_exec (
   $unless = undef
 ) {
   if $cwd == undef {
-    $command_prefix = ""
+    $command_cwd_prefix = ""
   } else {
-    $command_prefix = "cd ${cwd} && "
+    $command_cwd_prefix = "cd ${cwd} && "
   }
+
+  if $ruby_version == undef {
+    $command_ruby_prefix = ""
+  } else {
+    $command_ruby_prefix = "rvm ${ruby_version} do "
+  }
+
+  $command_prefix = $command_cwd_prefix + $command_ruby_prefix
 
   $escaped_command = join(["/bin/su -l ${user} -c ", shellquote(join(['/bin/bash --login -c ', shellquote(join([$command_prefix, $command], ""))], ""))], "")
 
