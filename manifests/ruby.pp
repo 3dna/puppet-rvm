@@ -2,10 +2,6 @@ define rvm::ruby (
   $user,
   $version
 ) {
-  rvm::install {"rvm-for-${user}":
-    user    => $user,
-    version => $version,
-  }
 
   single_user_rvm::install_ruby { "ruby-${version}-for-${user}":
     user => $user,
