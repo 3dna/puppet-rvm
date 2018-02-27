@@ -1,4 +1,4 @@
-define rvm::ruby (
+define rvm::install (
   $user
 ) {
   # FIXME: we need to use $user as name here, since single_user_rvm::install_ruby expects it!
