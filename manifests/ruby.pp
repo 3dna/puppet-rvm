@@ -5,7 +5,8 @@ define rvm::ruby (
   # FIXME: we need to use $user as name here, since single_user_rvm::install_ruby expects it!
   single_user_rvm::install { "${user}":
     user => $user,
-    require => [Exec['rvm-fix-to-install-single-user-rvm-gpg-key']]
+    require => [Exec['rvm-fix-to-install-single-user-rvm-gpg-key']],
+    homedir => '/home/rails',
   }
 
   if ! defined(Package['gnupg2']) {
